@@ -6,7 +6,8 @@
 <div class="text-center">
   <a href="{{ route('posts.create') }}" class="btn btn-success m-2">Create Post</a>
 </div>
-<table class="table">
+<div class="container">
+  <table class="table">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -39,6 +40,10 @@
               @endforeach
     </tbody>
   </table>
+  <div>{{ $allPosts->links('pagination::bootstrap-4') }}</div>
+
+</div>
+
 
   <script src="{{asset('js/deleteMsg.js')}}" text="text/javascript"></script>
   @endsection
