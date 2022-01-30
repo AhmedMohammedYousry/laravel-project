@@ -29,6 +29,6 @@
     </ul>
   </div>
 
-  <script src="{{asset('js/main.js')}}" text="text/javascript"></script>
+  
 @endsection
     

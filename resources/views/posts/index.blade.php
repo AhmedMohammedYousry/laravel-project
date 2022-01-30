@@ -24,7 +24,9 @@
                 <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->title }}</td>
                 <td>{{ isset($post->user)? $post->user->name : 'Not Found'; }}</td>
-                <td>{{ $post->created_at }}</td>
+               
+                
+                <td>{{ $post->created_at->format('M d Y') }}</td>
                 <td>
                     <a href="/posts/{{$post->id}}" class="btn btn-info">View</a>
                     <a href="/posts/{{$post->id}}/edit" class="btn btn-primary">Edit</a>  
