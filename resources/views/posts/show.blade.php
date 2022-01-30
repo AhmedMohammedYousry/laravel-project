@@ -1,29 +1,31 @@
 @extends('layouts.app')
 
-@section('title') Create @endsection
+@section('title') Show @endsection
 
 @section('content')
-        <form method="POST" action="{{ route('posts.store') }}">
-            @csrf
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Title</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1">
-            </div>
-            
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>  
-            </div>
-
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
-                <select class="form-control">
-                    <option value="1">Ahmed</option>
-                    <option value="2">Mohammed</option>
-                </select>
-            </div>
-            
-            <button class="btn btn-danger">TEST</button>
-        </form>
+<div class="card m-3">
+    <div class="card-header">
+      Post Info
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><span class="fw-bold">Title: </span>
+        Learn PHP </li>
+      <li class="list-group-item"><span class="fw-bold">Description: </span>
+        PHP and Laravel Course</li>
+    </ul>
+  </div>
+  <div class="card m-3">
+    <div class="card-header">
+      Post Creator Info
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><span class="fw-bold">Name: </span>
+        Ahmed </li>
+      <li class="list-group-item"><span class="fw-bold">Email: </span>
+        ahmad@gmail.com</li>
+      <li class="list-group-item"><span class="fw-bold">Created at: </span>
+        2018-01-20</li>
+    </ul>
+  </div>
 @endsection
     
