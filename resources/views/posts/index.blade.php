@@ -31,7 +31,7 @@
                     <form onsubmit="toSubmit(e)" style="display:inline" method="post" action="/posts/{{$post->id}}/delete">
                       @csrf
                       <input type="hidden" name="_method" value="DELETE" />
-                    <button type="submit" class="deleteButton btn btn-danger">Delete</button>
+                    <button type="submit" class="deleteButton btn btn-danger" onclick="return confirm('sure?')">Delete</button>
 
                       </form>
                 </td>

@@ -16,13 +16,13 @@
 //           }
 //     });
 //   });
-  function toSubmit(e){
-      e.preventDefault();
-    // if (confirm('Are you sure you want to delete this post?')) {
-    //     window.location.href = "/posts";
-    //   } else {
+//   function toSubmit(e){
+//       e.preventDefault();
+//     // if (confirm('Are you sure you want to delete this post?')) {
+//     //     window.location.href = "/posts";
+//     //   } else {
         
-    //     e.preventDefault();
-    //     return false;
-    //   }
- }
+//     //     e.preventDefault();
+//     //     return false;
+//     //   }
+//  }
