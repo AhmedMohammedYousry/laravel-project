@@ -3,15 +3,16 @@
 @section('title') Show @endsection
 
 @section('content')
+{{-- @dd($post) --}}
 <div class="card m-3">
     <div class="card-header">
       Post Info
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item"><span class="fw-bold">Title: </span>
-        Learn PHP </li>
+        {{$post->title}} </li>
       <li class="list-group-item"><span class="fw-bold">Description: </span>
-        PHP and Laravel Course</li>
+        {{$post->description}}</li>
     </ul>
   </div>
   <div class="card m-3">
@@ -20,12 +21,14 @@
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item"><span class="fw-bold">Name: </span>
-        Ahmed </li>
+        {{isset($post->user->name)?$post->user->name:'Not Found'}} </li>
       <li class="list-group-item"><span class="fw-bold">Email: </span>
-        ahmad@gmail.com</li>
+        {{isset($post->user->email)?$post->user->email:'Not Found'}}</li>
       <li class="list-group-item"><span class="fw-bold">Created at: </span>
-        2018-01-20</li>
+        {{isset($post->created_at)?$post->created_at:'Not Found'}} </li>
     </ul>
   </div>
+
+  <script src="{{asset('js/main.js')}}" text="text/javascript"></script>
 @endsection
     

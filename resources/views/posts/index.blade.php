@@ -18,19 +18,27 @@
     </thead>
     <tbody>
       @foreach ($allPosts as $post)
+      
               <tr>
-                <th scope="row">1</th>
-                <td>{{ $post['title'] }}</td>
-                <td>{{ $post['posted_by'] }}</td>
-                <td>{{ $post['created_at'] }}</td>
+                <th scope="row">{{ $post->id }}</th>
+                <td>{{ $post->title }}</td>
+                <td>{{ isset($post->user)? $post->user->name : 'Not Found'; }}</td>
+                <td>{{ $post->created_at }}</td>
                 <td>
-                    <a href="/posts/1" class="btn btn-info">View</a>
-                    <a href="/posts/1/edit" class="btn btn-primary">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href="/posts/{{$post->id}}" class="btn btn-info">View</a>
+                    <a href="/posts/{{$post->id}}/edit" class="btn btn-primary">Edit</a>  
+                    <form onsubmit="toSubmit(e)" style="display:inline" method="post" action="/posts/{{$post->id}}/delete">
+                      @csrf
+                      <input type="hidden" name="_method" value="DELETE" />
+                    <button type="submit" class="deleteButton btn btn-danger">Delete</button>
+
+                      </form>
                 </td>
               </tr>
 
               @endforeach
     </tbody>
   </table>
+
+  <script src="{{asset('js/deleteMsg.js')}}" text="text/javascript"></script>
   @endsection

@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Post;
+use App\Models\User;
+use Carbon\Carbon;
 class PostController extends Controller
 {
     public function index()
     {
-        $allPosts = [
-            ['title' => 'Learn PHP', 'posted_by'=> 'Ahmed', 'created_at' => '2018-01-20'],
-            ['title' => 'Solid Principles', 'posted_by'=> 'Mohamed', 'created_at' => '2018-05-25'],
-            ['title' => 'Design Patterns', 'posted_by'=> 'Ali', 'created_at' => '2019-01-02'],
-        ];
+        $allPosts = Post::all();
 
         return view('posts.index', [
             'allPosts' => $allPosts
@@ -21,21 +19,56 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        $users = User::all();
+        return view('posts.create',[
+            'users' => $users
+        ]);
     }
 
     public function store()
     {
+        $data = request()->all();
+        Post::create([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'user_id' => $data['post_creator']
+        ]);
         return redirect()->route('posts.index');
     }
 
     public function show($postId)
     {
-        return view('posts.show');
+        
+        $post = Post::
+        where('id', '=', $postId)
+        ->first();
+        return view('posts.show',[
+            'post' => $post
+        ]);
     }
 
     public function edit($postId)
     {
-        return view('posts.edit');
+        $users = User::all();
+        return view('posts.edit',[
+            'postId' => $postId,
+            'users' => $users
+        ]);
+    }
+    public function update()
+    {
+        $data = request()->all();
+        
+        Post::where('id',$data['id'])->update(['title' => $data['title'],
+        'description' => $data['description'],
+    ]);
+        return redirect()->route('posts.index');
+    }
+
+    public function destroy($postId)
+    {
+        
+        $post = Post::where('id', $postId)->firstorfail()->delete();
+        return redirect()->route('posts.index');
     }
 }
