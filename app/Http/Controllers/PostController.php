@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
@@ -61,10 +62,10 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request)
     {
         $data = request()->all();
-        
-        Post::where('id',$data['id'])->update(['title' => $data['title'],
-        'description' => $data['description'],
-    ]);
+        $post = Post::find($data['id']);
+    $post->slug = null;
+    $post->update(['title' => $data['title'],'description' => $data['description'],
+]);
         return redirect()->route('posts.index');
     }
 
