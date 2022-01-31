@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
+
 class PostController extends Controller
 {
     public function index()
@@ -24,8 +27,9 @@ class PostController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(StorePostRequest $request)
     {
+        
         $data = request()->all();
         Post::create([
             'title' => $data['title'],
@@ -54,7 +58,7 @@ class PostController extends Controller
             'users' => $users
         ]);
     }
-    public function update()
+    public function update(UpdatePostRequest $request)
     {
         $data = request()->all();
         
