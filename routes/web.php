@@ -24,3 +24,7 @@ Route::post('/posts',[PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{post}/edit',[PostController::class, 'edit'])->name('posts.edit');
 Route::put('/posts/{post}',[PostController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{post}/delete',[PostController::class, 'destroy'])->name('posts.destroy');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
