@@ -37,7 +37,7 @@ Route::get('/auth/redirect', function () {
 
 Route::get('/auth/callback', function () {
     $githubUser = Socialite::driver('github')->user();
-    dd($githubUser->token);
+    // dd($githubUser);
     $user = User::where('github_id', $githubUser->id)->first();
 
     if ($user) {
