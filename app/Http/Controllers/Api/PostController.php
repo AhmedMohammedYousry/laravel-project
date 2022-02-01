@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
-        $allPosts = Post::all();
+        $allPosts = Post::paginate(2);
         return PostResource::collection($allPosts);
     }
     public function show($postId){
