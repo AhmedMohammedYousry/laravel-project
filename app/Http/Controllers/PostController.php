@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
+use File;
 
 class PostController extends Controller
 {
@@ -84,7 +85,12 @@ class PostController extends Controller
     public function destroy($postId)
     {
         
-        $post = Post::where('id', $postId)->firstorfail()->delete();
+        $post =  Post::find($postId);
+        $file =public_path('img/'.$post->picture_path);
+        $img=File::delete($file);
+        $post->delete();
+        
+        
         return redirect()->route('posts.index');
     }
 }
