@@ -33,15 +33,8 @@ class PostController extends Controller
     {
         
         $data = request()->all();
-        $this->validate($request, [
-            'picture'  => 'image|mimes:jpg,png'
-           ]);
-      
-           $image = $request->file('picture');
-      
-           $new_name = $data['title'] . '.' . $image->getClientOriginalExtension();
-      
-           $image->move(public_path('img'), $new_name);
+        $new_name = $this->store_image($request);
+        
         Post::create([
             'title' => $data['title'],
             'description' => $data['description'],
@@ -84,13 +77,31 @@ class PostController extends Controller
 
     public function destroy($postId)
     {
-        
+
         $post =  Post::find($postId);
-        $file =public_path('img/'.$post->picture_path);
-        $img=File::delete($file);
+        $this->delete_image($post->picture_path);
         $post->delete();
         
         
         return redirect()->route('posts.index');
+    }
+
+    public function store_image(Request $req)
+    {
+        $this->validate($req, [
+            'picture'  => 'image|mimes:jpg,png'
+           ]);
+      
+           $image = $req->file('picture');
+      
+           $new_name = $req->title . '.' . $image->getClientOriginalExtension();
+      
+           $image->move(public_path('img'), $new_name);  
+           return $new_name; 
+    }
+    public function delete_image($name)
+    {
+        $file =public_path('img/'.$name);
+        $img=File::delete($file);
     }
 }
