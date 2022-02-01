@@ -75,7 +75,7 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-7 offset-md-5">
-                                <a class="btn btn-secondary" href="#">
+                                <a class="btn btn-secondary" href="{{ route('auth.google') }}">
                                     Login with Google+
                                 </a>
                             </div>
