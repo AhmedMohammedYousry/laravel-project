@@ -4,6 +4,9 @@
 
 @section('content')
 {{-- @dd($post) --}}
+<div class="text-center">
+  <img src="{{ asset('img/'.$post->picture_path) }}" width="200" height="200" alt="image">
+</div>
 <div class="card m-3">
     <div class="card-header">
       Post Info

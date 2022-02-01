@@ -16,6 +16,7 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraphs(rand(2,10), true),
+            'user_id' => $this->faker->randomDigit
         ];
     }
 }

@@ -14,7 +14,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $allPosts = Post::paginate(2);
+        $allPosts = Post::paginate(5);
         return view('posts.index', [
             'allPosts' => $allPosts
         ]);
@@ -32,11 +32,22 @@ class PostController extends Controller
     {
         
         $data = request()->all();
+        $this->validate($request, [
+            'picture'  => 'image|mimes:jpg,png'
+           ]);
+      
+           $image = $request->file('picture');
+      
+           $new_name = $data['title'] . '.' . $image->getClientOriginalExtension();
+      
+           $image->move(public_path('img'), $new_name);
         Post::create([
             'title' => $data['title'],
             'description' => $data['description'],
-            'user_id' => $data['post_creator']
+            'user_id' => $data['post_creator'],
+            'picture_path' => $new_name
         ]);
+       
         return redirect()->route('posts.index');
     }
 
@@ -65,6 +76,7 @@ class PostController extends Controller
         $post = Post::find($data['id']);
     $post->slug = null;
     $post->update(['title' => $data['title'],'description' => $data['description'],
+    'user_id' => $data['post_creator']
 ]);
         return redirect()->route('posts.index');
     }
